@@ -5,8 +5,56 @@
     <style>
         body { font-family: 'Comic Sans MS', sans-serif; text-align: center; background-color: #f0f8ff; }
         .word-card { border: 2px solid #ff6347; padding: 20px; display: inline-block; border-radius: 15px; background: white; }
+        /* The container creates the 3D space */
+.flashcard-container {
+  width: 200px;
+  height: 250px;
+  perspective: 1000px; 
+  margin: 20px auto;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* This class is toggled by JavaScript */
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hides the back when the front is showing */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-size: 24px;
+}
+
+.front {
+  background-color: #ffffff;
+  color: #333;
+  border: 3px solid #4CAF50;
+}
+
+.back {
+  background-color: #4CAF50;
+  color: white;
+  transform: rotateY(180deg); /* Starts flipped away from the user */
+}
     </style>
 </head>
+   
 <body>
     <h1>¡Hola! Let's Learn Spanish</h1>
     <div class="word-card">
@@ -14,5 +62,21 @@
         <p style="font-size: 40px;">🍎</p>
         <h2 style="color: #ff6347;">La Manzana</h2>
     </div>
+     <div class="flashcard-container">
+  <div class="card" onclick="flipCard(this)">
+    <div class="card-face front">
+      <p>The Cat</p>
+      <span>🐱</span>
+    </div>
+    <div class="card-face back">
+      <p>El Gato</p>
+    </div>
+  </div>
+</div>
+    <script>
+      function flipCard(cardElement) {
+        cardElement.classList.toggle('is-flipped');
+      }
+    </script>
 </body>
 </html>
